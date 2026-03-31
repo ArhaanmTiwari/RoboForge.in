@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arhaan Tech Innovations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:,">
+    <style>
+      html { scroll-behavior: smooth; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; }
+
+      /* NAV */
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; letter-spacing: -0.5px; }
+      .logo span { color: #378ADD; }
+      .nav-links { display: flex; align-items: center; gap: 1.25rem; }
+      .nav-link { font-size: 13px; color: #6b7280; font-weight: 500; text-decoration: none; transition: color 0.2s; cursor: pointer; white-space: nowrap; }
+      .nav-link:hover { color: #042C53; }
+      .nav-right { display: flex; align-items: center; gap: 10px; }
+      .btn-account { background: #f8fafc; color: #042C53; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-account:hover { background: #E6F1FB; }
+      .cart-toggle { padding: 10px 18px; background: #042C53; border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; transition: background 0.2s; display: flex; align-items: center; gap: 6px; }
+      .cart-toggle:hover { background: #185FA5; }
+      .cart-cart-button { position: static; }
+      .cart-count { background: #378ADD; border-radius: 50%; width: 20px; height: 20px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+
+      /* CATEGORY BAR */
+      .category-bar { display: flex; align-items: center; justify-content: center; gap: 0; background: #042C53; overflow-x: auto; }
+      .cat-link { font-size: 16px; font-weight: 600; color: #85B7EB; text-decoration: none; padding: 14px 32px; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+      .cat-link:hover { color: #fff; border-bottom-color: #378ADD; background: rgba(255,255,255,0.08); }
+
+      /* HERO */
+      .hero { background: linear-gradient(135deg, #E6F1FB 0%, #fff 70%); padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #e5e7eb; }
+      .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #E6F1FB; border: 1px solid #B5D4F4; color: #0C447C; border-radius: 100px; padding: 4px 14px; font-size: 13px; font-weight: 500; margin-bottom: 1.2rem; }
+      .hero h1 { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: #042C53; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.15; }
+      .hero h1 span { color: #378ADD; }
+      .hero p { font-size: 16px; color: #6b7280; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+      .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+      .btn-primary { background: #042C53; color: #fff; border: none; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-primary:hover { background: #185FA5; }
+      .btn-secondary { background: #fff; color: #042C53; border: 1px solid #B5D4F4; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
+      .btn-secondary:hover { border-color: #378ADD; }
+
+      /* STATS */
+      .stats { background: #042C53; padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+      .stat { text-align: center; }
+      .stat-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; }
+      .stat-label { font-size: 13px; color: #85B7EB; margin-top: 2px; }
+
+      /* SECTIONS */
+      .section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+      .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+      .section-icon { width: 36px; height: 36px; border-radius: 10px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+      .section-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; }
+
+      /* PRODUCTS GRID */
+      .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+      .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; text-align: left; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+      .card:hover { transform: translateY(-3px); border-color: #85B7EB; }
+      .card-icon { width: 48px; height: 48px; border-radius: 12px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 1rem; }
+      .card h3 { font-size: 16px; font-weight: 700; color: #042C53; margin-bottom: 6px; font-family: 'Syne', sans-serif; }
+      .card p { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 1rem; }
+      .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+      .price { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #185FA5; }
+      .order-btn { background: #042C53; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .order-btn:hover { background: #185FA5; }
+
+      /* DIVIDER */
+      .section-divider { border: none; border-top: 1px solid #e5e7eb; margin: 0 2rem; }
+
+      /* CUSTOM PROJECT */
+      #custom-project { background: #042C53; padding: 4rem 2rem; text-align: center; }
+      #custom-project h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+      #custom-project p { color: #85B7EB; font-size: 15px; margin-bottom: 2rem; }
+      .idea-form { max-width: 480px; margin: auto; display: flex; flex-direction: column; gap: 12px; }
+      .idea-form input, .idea-form textarea { padding: 12px 16px; border-radius: 10px; border: 1px solid #B5D4F4; font-size: 15px; font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; outline: none; transition: border-color 0.2s; }
+      .idea-form input:focus, .idea-form textarea:focus { border-color: #378ADD; }
+      .idea-form textarea { min-height: 120px; resize: vertical; }
+      .idea-form button { padding: 13px; border: none; border-radius: 10px; background: #378ADD; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .idea-form button:hover { background: #185FA5; }
+
+      /* FOOTER */
+      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+      .footer-logo span { color: #378ADD; }
+      .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 10px; flex-wrap: wrap; }
+      .footer-links a { font-size: 13px; color: #85B7EB; text-decoration: none; transition: color 0.2s; }
+      .footer-links a:hover { color: #fff; }
+
+      /* CART SIDEBAR */
+      .cart-sidebar { position: fixed; top: 0; right: -420px; width: 370px; height: 100%; background: #fff; color: #1a1a1a; padding: 1.5rem; box-shadow: -4px 0 30px rgba(0,0,0,0.12); transition: 0.35s ease; overflow-y: auto; z-index: 999; font-family: 'DM Sans', sans-serif; border-left: 1px solid #e5e7eb; }
+      .cart-sidebar.active { right: 0; }
+      .cart-sidebar h2 { font-family: 'Syne', sans-serif; font-size: 20px; color: #042C53; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
+      .cart-item { background: #f8fafc; border: 1px solid #e5e7eb; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+      .remove-btn { background: #FEE2E2; border: none; padding: 5px 10px; border-radius: 6px; color: #991B1B; cursor: pointer; font-weight: 700; font-size: 12px; }
+      .remove-btn:hover { background: #FECACA; }
+      #total { font-family: 'Syne', sans-serif; font-size: 18px; color: #185FA5; margin: 1rem 0; }
+      .close-btn { width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; color: #6b7280; cursor: pointer; font-size: 14px; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
+      #cart-sidebar .checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #042C53; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; transition: background 0.2s; }
+      #cart-sidebar .checkout-btn:hover { background: #185FA5; }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <div class="logo">Arhaan<span>Tech</span></div>
+      <div class="nav-right">
+        <button class="btn-account" id="account-btn" onclick="window.location.href='account.html'">My Account</button>
+        <button onclick="toggleCart()" class="cart-toggle cart-cart-button">
+          🛒 Cart <span id="cart-count" class="cart-count">0</span>
+        </button>
+      </div>
+    </nav> 
+
+    <!-- CATEGORY BAR -->
+    <div class="category-bar">
+      <a class="cat-link" href="#security">🔐 Security</a>
+      <a class="cat-link" href="#utility">🚗 Utility</a>
+      <a class="cat-link" href="#gaming">🎮 Gaming</a>
+      <a class="cat-link" href="#kits">🧰 Kits</a>
+      <a class="cat-link" href="track-order.html" id="track-order-link">📦 Track Order</a>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-badge">⚡ Made in Indore, India</div>
+      <h1>Arduino Projects &<br><span>Kits That Wow</span></h1>
+      <p>Real Arduino builds — security systems, games, and kits — handcrafted by a 10-year-old developer who loves electronics.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+        <button class="btn-secondary" onclick="document.getElementById('custom-project').scrollIntoView({behavior:'smooth'})">Custom Order</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Products</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Handmade</div></div>
+      <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Rating</div></div>
+      <div class="stat"><div class="stat-num">Fast</div><div class="stat-label">Shipping</div></div>
+    </div>
+
+    <!-- SECURITY PRODUCTS -->
+    <div class="section" id="security">
+      <div class="section-header">
+        <div class="section-icon">🔐</div>
+        <div class="section-title">Security Products</div>
+      </div>
+      <div class="products-grid">
+        <div class="card">
+          <div class="card-icon">🔑</div>
+          <h3>Smart Keypad Lock</h3>
+          <p>Password protected lock with LCD display and servo mechanism.</p>
+          <div class="card-footer"><div class="price">₹1199</div><button class="order-btn" onclick="window.location.href='security_lock.html'">Order Now</button></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👆</div>
+          <h3>Touch Sensor Alarm</h3>
+          <p>Triggers alarm when touched. Perfect for drawers and boxes.</p>
+          <div class="card-footer"><div class="price">₹899</div><button class="order-btn" onclick="window.location.href='touch_alarm.html'">Order Now</button></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚨</div>
+          <h3>Motion Detection Alarm</h3>
+          <p>Detects movement and activates buzzer alert system.</p>
+          <div class="card-footer"><div class="price">₹999</div><button class="order-btn" onclick="window.location.href='motion-alarm.html'">Order Now</button></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚪</div>
+          <h3>Smart Door Security System</h3>
+          <p>Advanced ultrasonic detection + keypad control.</p>
+          <div class="card-footer"><div class="price">₹1799</div><button class="order-btn" onclick="window.location.href='smart-door.html'">Order Now</button></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- UTILITY PRODUCTS -->
+    <div class="section" id="utility">
+      <div class="section-header">
+        <div class="section-icon">🚗</div>
+        <div class="section-title">Utility Products</div>
+      </div>
+      <div class="products-grid">
+        <div class="card">
+          <div class="card-icon">📡</div>
+          <h3>Smart Parking Sensor</h3>
+          <p>Ultrasonic distance detection with LCD display and buzzer alert.</p>
+          <div class="card-footer"><div class="price">₹1299</div><button class="order-btn" onclick="window.location.href='parking-sensor.html'">Order Now</button></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- FUN & GAMING -->
+    <div class="section" id="gaming">
+      <div class="section-header">
+        <div class="section-icon">🎮</div>
+        <div class="section-title">Fun & Gaming Products</div>
+      </div>
+      <div class="products-grid">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Reaction Time Game</h3>
+          <p>Test your speed! Press button when LED lights up.</p>
+          <div class="card-footer"><div class="price">₹799</div><button class="order-btn" onclick="window.location.href='reaction-game.html'">Order Now</button></div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Simon Says Memory Game</h3>
+          <p>Repeat LED patterns to win. Fun brain training game.</p>
+          <div class="card-footer"><div class="price">₹999</div><button class="order-btn" onclick="window.location.href='simon-game.html'">Order Now</button></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- ARDUINO KITS -->
+    <div class="section" id="kits">
+      <div class="section-header">
+        <div class="section-icon">🧰</div>
+        <div class="section-title">Arduino Kits</div>
+      </div>
+      <div class="products-grid">
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>ArhaanTech Arduino Kit</h3>
+          <p>Everything you need to start building your own Arduino projects.</p>
+          <div class="card-footer"><div class="price">₹1999</div><button class="order-btn" onclick="window.location.href='beginner-kit.html'">Order Now</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOM PROJECT -->
+    <section id="custom-project">
+      <h2>Got a Custom Idea? 💡</h2>
+      <p>Tell me your Arduino project idea and I'll build it for you!</p>
+      <form id="ideaForm" class="idea-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="idea" placeholder="Describe your idea..." required></textarea>
+        <button type="submit">Send Idea 🚀</button>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
+      <div class="footer-links">
+        <a href="track-order.html">Track Order</a>
+        <a href="account.html">My Account</a>
+        <a href="#custom-project">Custom Project</a>
+      </div>
+      <p style="margin-top:10px;">© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+    </footer>
+
+    <!-- CART SIDEBAR -->
+    <div id="cart-sidebar" class="cart-sidebar">
+      <h2>Your Cart 🛒</h2>
+      <div id="cart-items"></div>
+      <h3 id="total"></h3>
+      <button onclick="window.location.href='checkout.html'" class="checkout-btn">Checkout</button>
+      <button onclick="toggleCart()" class="close-btn">Close</button>
+    </div>
+
+    <script type="module" src="cart.js"></script>
+    <script type="module" src="custom-idea.js"></script>
+
+    <!-- Show profile button if logged in -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+      const app = initializeApp({
+        apiKey: "AIzaSyBsvQD_h8-UCpt3FjcJC5rCFkoGagCmZo4",
+        authDomain: "arhaan-tech.firebaseapp.com",
+        projectId: "arhaan-tech",
+        storageBucket: "arhaan-tech.firebasestorage.app",
+        messagingSenderId: "378370431321",
+        appId: "1:378370431321:web:c3e01ee291112ec24e9448"
+      });
+
+      const auth = getAuth(app);
+      onAuthStateChanged(auth, (user) => {
+        const btn = document.getElementById('account-btn');
+        if (user) {
+          btn.textContent = '👤 ' + (user.displayName?.split(' ')[0] || 'Account');
+          btn.onclick = () => window.location.href = 'profile.html';
+        } else {
+          btn.textContent = 'My Account';
+          btn.onclick = () => window.location.href = 'account.html';
+        }
+      });
+      onAuthStateChanged(auth, (user) => {
+  const btn = document.getElementById('account-btn');
+  const trackLink = document.getElementById('track-order-link');
+  
+  if (user) {
+    btn.textContent = '👤 ' + (user.displayName?.split(' ')[0] || 'Account');
+    btn.onclick = () => window.location.href = 'profile.html';
+    if (trackLink) trackLink.style.display = 'none'; // hide when logged in
+  } else {
+    btn.textContent = 'My Account';
+    btn.onclick = () => window.location.href = 'account.html';
+    if (trackLink) trackLink.style.display = 'block'; // show when logged out
+  }
+});
+    </script>
+
+  </body>
+</html>

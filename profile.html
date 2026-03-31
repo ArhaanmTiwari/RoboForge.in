@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account | Arhaan Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:,">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; min-height: 100vh; }
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; cursor: pointer; }
+      .logo span { color: #378ADD; }
+      .nav-right { display: flex; align-items: center; gap: 10px; }
+      .btn-shop { background: #042C53; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .btn-logout { background: #f8fafc; color: #6b7280; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .btn-logout:hover { color: #042C53; }
+      #loading { display: flex; align-items: center; justify-content: center; height: 60vh; font-size: 16px; color: #6b7280; }
+      #main { display: none; max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
+      .welcome { margin-bottom: 2rem; }
+      .welcome h1 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #042C53; margin-bottom: 4px; }
+      .welcome p { font-size: 14px; color: #6b7280; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+      .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; }
+      .card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
+      .form-group { margin-bottom: 1rem; }
+      .form-group label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+      .form-group input { width: 100%; padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #1a1a1a; outline: none; transition: border-color 0.2s; background: #fff; }
+      .form-group input:focus { border-color: #378ADD; }
+      .btn-save { width: 100%; padding: 11px; border: none; border-radius: 10px; background: #042C53; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-save:hover { background: #185FA5; }
+      .saved-msg { font-size: 13px; color: #166534; margin-top: 8px; text-align: center; display: none; }
+      .saved-msg.show { display: block; }
+      .info-row { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+      .info-row:last-child { border-bottom: none; }
+      .info-row .label { color: #6b7280; }
+      .info-row .value { font-weight: 500; color: #042C53; }
+      .orders-section h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; }
+      .order-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
+      .order-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 8px; }
+      .order-id { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #042C53; }
+      .order-date { font-size: 13px; color: #6b7280; }
+      .status-badge { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
+      .status-received { background: #E6F1FB; color: #0C447C; }
+      .status-processing { background: #FEF3C7; color: #92400E; }
+      .status-shipped { background: #DCFCE7; color: #166534; }
+      .status-delivered { background: #F0FDF4; color: #15803D; }
+      .order-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+      .order-row .lbl { color: #6b7280; }
+      .order-row .val { font-weight: 500; color: #1a1a1a; max-width: 300px; text-align: right; }
+      .order-total { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; }
+      .empty-orders { text-align: center; padding: 3rem; color: #9ca3af; font-size: 15px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; }
+      .empty-orders a { color: #378ADD; text-decoration: none; font-weight: 500; }
+      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 3rem; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+      .footer-logo span { color: #378ADD; }
+      @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="logo" onclick="window.location.href='index.html'">Arhaan<span>Tech</span></div>
+      <div class="nav-right">
+        <button class="btn-shop" onclick="window.location.href='index.html'">← Shop</button>
+        <button class="btn-logout" id="logout-btn">Log Out</button>
+      </div>
+    </nav>
+
+    <div id="loading">Loading your account...</div>
+
+    <div id="main">
+      <div class="welcome">
+        <h1>My Account 👋</h1>
+        <p id="welcome-sub">Welcome back!</p>
+      </div>
+
+      <div class="grid">
+        <!-- Account Info -->
+        <div class="card">
+          <h2>Account Info</h2>
+          <div class="info-row"><span class="label">Name</span><span class="value" id="info-name">—</span></div>
+          <div class="info-row"><span class="label">Email</span><span class="value" id="info-email">—</span></div>
+          <div class="info-row"><span class="label">Member since</span><span class="value" id="info-since">—</span></div>
+        </div>
+
+        <!-- Saved Address -->
+        <div class="card">
+          <h2>Saved Delivery Details</h2>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="saved-name" placeholder="Your full name" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="saved-phone" placeholder="+91 00000 00000" />
+          </div>
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <input type="text" id="saved-address" placeholder="House no, street, city" />
+          </div>
+          <button class="btn-save" onclick="saveDetails()">Save Details</button>
+          <div class="saved-msg" id="saved-msg">✅ Details saved!</div>
+        </div>
+      </div>
+
+      <!-- Order History -->
+      <div class="orders-section">
+        <h2>Order History</h2>
+        <div id="orders-list"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
+      <p>© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+    </footer>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+      import { getFirestore, doc, getDoc, updateDoc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBsvQD_h8-UCpt3FjcJC5rCFkoGagCmZo4",
+        authDomain: "arhaan-tech.firebaseapp.com",
+        projectId: "arhaan-tech",
+        storageBucket: "arhaan-tech.firebasestorage.app",
+        messagingSenderId: "378370431321",
+        appId: "1:378370431321:web:c3e01ee291112ec24e9448"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      let currentUser = null;
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) { window.location.href = 'account.html'; return; }
+        currentUser = user;
+
+        // Load user profile
+        const snap = await getDoc(doc(db, 'customers', user.uid));
+        const data = snap.exists() ? snap.data() : {};
+
+        // Update account info
+        document.getElementById('welcome-sub').textContent = 'Welcome back, ' + (data.name || user.displayName || 'Customer') + '!';
+        document.getElementById('info-name').textContent = data.name || user.displayName || '—';
+        document.getElementById('info-email').textContent = user.email;
+        document.getElementById('info-since').textContent = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+
+        // Prefill saved details
+        if (data.address) document.getElementById('saved-address').value = data.address;
+        if (data.phone) document.getElementById('saved-phone').value = data.phone;
+        if (data.name) document.getElementById('saved-name').value = data.name;
+
+        // Load orders
+        await loadOrders(user.email);
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+      });
+
+      async function loadOrders(email) {
+        try {
+          const q = query(collection(db, 'orders'), where('email', '==', email));
+          const snapshot = await getDocs(q);
+
+          if (snapshot.empty) {
+            document.getElementById('orders-list').innerHTML = `
+              <div class="empty-orders">
+                No orders yet! <a href="index.html">Start shopping →</a>
+              </div>`;
+            return;
+          }
+
+          const orders = [];
+          snapshot.forEach(doc => orders.push(doc.data()));
+
+          // Sort newest first
+          orders.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+          document.getElementById('orders-list').innerHTML = orders.map(o => {
+            const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recently';
+            const statusClass = {
+              'Received': 'status-received',
+              'Processing': 'status-processing',
+              'Shipped': 'status-shipped',
+              'Delivered': 'status-delivered'
+            }[o.status] || 'status-received';
+
+            return `
+              <div class="order-card">
+                <div class="order-header">
+                  <div>
+                    <div class="order-id">${o.orderId}</div>
+                    <div class="order-date">${date}</div>
+                  </div>
+                  <span class="status-badge ${statusClass}">${o.status || 'Received'}</span>
+                </div>
+                <div class="order-row"><span class="lbl">Items</span><span class="val">${o.items}</span></div>
+                <div class="order-row"><span class="lbl">Delivery to</span><span class="val">${o.address}</span></div>
+                <div class="order-total"><span>Total</span><span>₹${o.total}</span></div>
+              </div>`;
+          }).join('');
+        } catch (err) {
+          console.error(err);
+          document.getElementById('orders-list').innerHTML = '<div class="empty-orders">Could not load orders. Please try again!</div>';
+        }
+      }
+
+      window.saveDetails = async function() {
+        if (!currentUser) return;
+        const name = document.getElementById('saved-name').value.trim();
+        const phone = document.getElementById('saved-phone').value.trim();
+        const address = document.getElementById('saved-address').value.trim();
+
+        try {
+          await setDoc(doc(db, 'customers', currentUser.uid), { name, phone, address }, { merge: true });
+          const msg = document.getElementById('saved-msg');
+          msg.classList.add('show');
+          setTimeout(() => msg.classList.remove('show'), 3000);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = 'index.html';
+      });
+    </script>
+
+  </body>
+</html>

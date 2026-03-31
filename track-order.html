@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Order | Arhaan Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    
+    
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; min-height: 100vh; }
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; cursor: pointer; }
+      .logo span { color: #378ADD; }
+      .back-btn { background: #f8fafc; color: #042C53; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .back-btn:hover { background: #E6F1FB; }
+      main { max-width: 680px; margin: 3rem auto; padding: 0 2rem; }
+      .page-title { margin-bottom: 2rem; }
+      .page-title h1 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #042C53; margin-bottom: 6px; }
+      .page-title p { font-size: 15px; color: #6b7280; }
+      .search-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
+      .search-card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; }
+      .tabs { display: flex; background: #f8fafc; border-radius: 10px; padding: 4px; margin-bottom: 1.25rem; }
+      .tab { flex: 1; padding: 9px; text-align: center; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.2s; color: #6b7280; border: none; background: transparent; font-family: 'DM Sans', sans-serif; }
+      .tab.active { background: #fff; color: #042C53; border: 1px solid #e5e7eb; }
+      .form-group { margin-bottom: 1rem; }
+      .form-group label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+      .form-group input { width: 100%; padding: 11px 14px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 15px; font-family: 'DM Sans', sans-serif; color: #1a1a1a; outline: none; transition: border-color 0.2s; }
+      .form-group input:focus { border-color: #378ADD; }
+      .btn-search { width: 100%; padding: 13px; border: none; border-radius: 10px; background: #042C53; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-search:hover { background: #185FA5; }
+      .btn-search:disabled { opacity: 0.5; cursor: not-allowed; }
+      .message { padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 1rem; display: none; }
+      .message.error { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; display: block; }
+      .message.info { background: #E6F1FB; border: 1px solid #B5D4F4; color: #0C447C; display: block; }
+      .orders-section h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; }
+      .order-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
+      .order-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 8px; }
+      .order-id { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #042C53; }
+      .order-date { font-size: 13px; color: #6b7280; }
+      .status-badge { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
+      .status-received { background: #E6F1FB; color: #0C447C; }
+      .status-processing { background: #FEF3C7; color: #92400E; }
+      .status-shipped { background: #DCFCE7; color: #166534; }
+      .status-delivered { background: #F0FDF4; color: #15803D; }
+      .order-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+      .order-row .label { color: #6b7280; }
+      .order-row .value { color: #1a1a1a; font-weight: 500; max-width: 300px; text-align: right; }
+      .order-total { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #042C53; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; }
+      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 4rem; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+      .footer-logo span { color: #378ADD; }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="logo" onclick="window.location.href='index.html'">Arhaan<span>Tech</span></div>
+      <button class="back-btn" onclick="window.location.href='index.html'">← Back to Shop</button>
+    </nav>
+
+    <main>
+      <div class="page-title">
+        <h1>Track Your Order</h1>
+        <p>Enter your phone number or email to see your orders</p>
+      </div>
+
+      <div class="search-card">
+        <h2>Look Up Orders</h2>
+        <div class="tabs">
+          <button class="tab active" id="tab-phone" onclick="switchTab('phone')">📱 Phone</button>
+          <button class="tab" id="tab-email" onclick="switchTab('email')">📧 Email</button>
+        </div>
+        <div class="form-group">
+          <label id="input-label">Phone Number</label>
+          <input type="text" id="search-input" placeholder="Enter your phone number" />
+        </div>
+        <button class="btn-search" id="search-btn" onclick="searchOrders()">Find My Orders</button>
+        <div class="message" id="message"></div>
+      </div>
+
+      <div id="orders-section" style="display:none">
+        <h2 id="results-title"></h2>
+        <div id="orders-list"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
+      <p>© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+    </footer>
+
+    
+
+      <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+      import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBsvQD_h8-UCpt3FjcJC5rCFkoGagCmZo4",
+        authDomain: "arhaan-tech.firebaseapp.com",
+        projectId: "arhaan-tech",
+        storageBucket: "arhaan-tech.firebasestorage.app",
+        messagingSenderId: "378370431321",
+        appId: "1:378370431321:web:c3e01ee291112ec24e9448"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      let currentTab = 'phone';
+
+      window.switchTab = function(tab) {
+        currentTab = tab;
+        document.getElementById('tab-phone').className = 'tab' + (tab === 'phone' ? ' active' : '');
+        document.getElementById('tab-email').className = 'tab' + (tab === 'email' ? ' active' : '');
+        document.getElementById('input-label').textContent = tab === 'phone' ? 'Phone Number' : 'Email Address';
+        document.getElementById('search-input').placeholder = tab === 'phone' ? 'Enter your phone number' : 'Enter your email address';
+        document.getElementById('search-input').value = '';
+        document.getElementById('message').className = 'message';
+        document.getElementById('orders-section').style.display = 'none';
+      }
+
+      window.searchOrders = async function() {
+        const input = document.getElementById('search-input').value.trim();
+        const btn = document.getElementById('search-btn');
+        const msg = document.getElementById('message');
+
+        if (!input) {
+          msg.textContent = 'Please enter your ' + (currentTab === 'phone' ? 'phone number' : 'email') + '!';
+          msg.className = 'message error';
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Searching...';
+        msg.className = 'message';
+
+        try {
+          const field = currentTab === 'phone' ? 'phone' : 'email';
+          const q = query(
+            collection(db, 'orders'),
+            where(field, '==', input)
+          );
+          const snapshot = await getDocs(q);
+
+          if (snapshot.empty) {
+            msg.textContent = 'No orders found. Make sure you used the same ' + (currentTab === 'phone' ? 'phone number' : 'email') + ' at checkout!';
+            msg.className = 'message error';
+            document.getElementById('orders-section').style.display = 'none';
+          } else {
+            const orders = [];
+            snapshot.forEach(doc => orders.push(doc.data()));
+            showOrders(orders);
+          }
+        } catch (err) {
+          console.error(err);
+          msg.textContent = 'Something went wrong. Please try again!';
+          msg.className = 'message error';
+        }
+
+        btn.disabled = false;
+        btn.textContent = 'Find My Orders';
+      }
+
+      function showOrders(orders) {
+        document.getElementById('results-title').textContent = orders.length + ' order' + (orders.length > 1 ? 's' : '') + ' found';
+        document.getElementById('orders-list').innerHTML = orders.map(o => {
+          const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Recently';
+          const statusClass = {
+            'Received': 'status-received',
+            'Processing': 'status-processing',
+            'Shipped': 'status-shipped',
+            'Delivered': 'status-delivered'
+          }[o.status] || 'status-received';
+
+          return `
+            <div class="order-card">
+              <div class="order-header">
+                <div>
+                  <div class="order-id">${o.orderId}</div>
+                  <div class="order-date">${date}</div>
+                </div>
+                <span class="status-badge ${statusClass}">${o.status || 'Received'}</span>
+              </div>
+              <div class="order-row"><span class="label">Items</span><span class="value">${o.items}</span></div>
+              <div class="order-row"><span class="label">Delivery to</span><span class="value">${o.address}</span></div>
+              <div class="order-total"><span>Total</span><span>₹${o.total}</span></div>
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById('orders-section').style.display = 'block';
+        document.getElementById('orders-section').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      document.getElementById('search-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') window.searchOrders();
+      });
+    </script>
+
+</body>
+</html>

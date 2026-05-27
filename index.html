@@ -1,104 +1,105 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arhaan Tech Innovations</title>
+    <title>RoboForge.in — Arduino Projects & Kits</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="icon" href="data:,">
     <style>
       html { scroll-behavior: smooth; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; }
+      body { font-family: 'DM Sans', sans-serif; background: #090D18; color: #F1F5F9; }
 
       /* NAV */
-      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
-      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; letter-spacing: -0.5px; }
-      .logo span { color: #378ADD; }
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #0D1525; border-bottom: 1px solid #1E2D45; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #F1F5F9; letter-spacing: -0.5px; }
+      .logo span { color: #FF5722; }
       .nav-links { display: flex; align-items: center; gap: 1.25rem; }
-      .nav-link { font-size: 13px; color: #6b7280; font-weight: 500; text-decoration: none; transition: color 0.2s; cursor: pointer; white-space: nowrap; }
-      .nav-link:hover { color: #042C53; }
+      .nav-link { font-size: 13px; color: #94A3B8; font-weight: 500; text-decoration: none; transition: color 0.2s; cursor: pointer; white-space: nowrap; }
+      .nav-link:hover { color: #F1F5F9; }
       .nav-right { display: flex; align-items: center; gap: 10px; }
-      .btn-account { background: #f8fafc; color: #042C53; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .btn-account:hover { background: #E6F1FB; }
-      .cart-toggle { padding: 10px 18px; background: #042C53; border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; transition: background 0.2s; display: flex; align-items: center; gap: 6px; }
-      .cart-toggle:hover { background: #185FA5; }
+      .btn-account { background: #162035; color: #F1F5F9; border: 1px solid #1E2D45; border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-account:hover { background: #1E2D45; }
+      .cart-toggle { padding: 10px 18px; background: #FF5722; border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; transition: background 0.2s; display: flex; align-items: center; gap: 6px; }
+      .cart-toggle:hover { background: #E64A19; }
       .cart-cart-button { position: static; }
-      .cart-count { background: #378ADD; border-radius: 50%; width: 20px; height: 20px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+      .cart-count { background: #22D3EE; color: #090D18; border-radius: 50%; width: 20px; height: 20px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
 
       /* CATEGORY BAR */
-      .category-bar { display: flex; align-items: center; justify-content: center; gap: 0; background: #042C53; overflow-x: auto; }
-      .cat-link { font-size: 16px; font-weight: 600; color: #85B7EB; text-decoration: none; padding: 14px 32px; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
-      .cat-link:hover { color: #fff; border-bottom-color: #378ADD; background: rgba(255,255,255,0.08); }
+      .category-bar { display: flex; align-items: center; justify-content: center; gap: 0; background: #0D1525; overflow-x: auto; border-bottom: 1px solid #1E2D45; }
+      .cat-link { font-size: 16px; font-weight: 600; color: #64748B; text-decoration: none; padding: 14px 32px; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+      .cat-link:hover { color: #F1F5F9; border-bottom-color: #FF5722; background: rgba(255,87,34,0.08); }
 
       /* HERO */
-      .hero { background: linear-gradient(135deg, #E6F1FB 0%, #fff 70%); padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #e5e7eb; }
-      .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #E6F1FB; border: 1px solid #B5D4F4; color: #0C447C; border-radius: 100px; padding: 4px 14px; font-size: 13px; font-weight: 500; margin-bottom: 1.2rem; }
-      .hero h1 { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: #042C53; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.15; }
-      .hero h1 span { color: #378ADD; }
-      .hero p { font-size: 16px; color: #6b7280; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+      .hero { background: linear-gradient(135deg, #0D1E38 0%, #090D18 70%); padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #1E2D45; }
+      .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: #1A2A45; border: 1px solid #FF5722; color: #FF5722; border-radius: 100px; padding: 4px 14px; font-size: 13px; font-weight: 500; margin-bottom: 1.2rem; }
+      .hero h1 { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: #F1F5F9; letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.15; }
+      .hero h1 span { color: #FF5722; }
+      .hero p { font-size: 16px; color: #94A3B8; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
       .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-      .btn-primary { background: #042C53; color: #fff; border: none; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .btn-primary:hover { background: #185FA5; }
-      .btn-secondary { background: #fff; color: #042C53; border: 1px solid #B5D4F4; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
-      .btn-secondary:hover { border-color: #378ADD; }
+      .btn-primary { background: #FF5722; color: #fff; border: none; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-primary:hover { background: #E64A19; }
+      .btn-secondary { background: transparent; color: #F1F5F9; border: 1px solid #1E2D45; border-radius: 10px; padding: 12px 28px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
+      .btn-secondary:hover { border-color: #FF5722; }
 
       /* STATS */
-      .stats { background: #042C53; padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+      .stats { background: #0D1525; padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; border-bottom: 1px solid #1E2D45; }
       .stat { text-align: center; }
-      .stat-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; }
-      .stat-label { font-size: 13px; color: #85B7EB; margin-top: 2px; }
+      .stat-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #FF5722; }
+      .stat-label { font-size: 13px; color: #64748B; margin-top: 2px; }
 
       /* SECTIONS */
       .section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
       .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
-      .section-icon { width: 36px; height: 36px; border-radius: 10px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-      .section-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; }
+      .section-icon { width: 36px; height: 36px; border-radius: 10px; background: #1A2A45; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+      .section-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #F1F5F9; }
 
       /* PRODUCTS GRID */
       .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
-      .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; text-align: left; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
-      .card:hover { transform: translateY(-3px); border-color: #85B7EB; }
-      .card-icon { width: 48px; height: 48px; border-radius: 12px; background: #E6F1FB; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 1rem; }
-      .card h3 { font-size: 16px; font-weight: 700; color: #042C53; margin-bottom: 6px; font-family: 'Syne', sans-serif; }
-      .card p { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 1rem; }
+      .card { background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; padding: 1.5rem; text-align: left; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+      .card:hover { transform: translateY(-3px); border-color: #FF5722; }
+      .card-icon { width: 48px; height: 48px; border-radius: 12px; background: #1A2A45; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 1rem; }
+      .card h3 { font-size: 16px; font-weight: 700; color: #F1F5F9; margin-bottom: 6px; font-family: 'Syne', sans-serif; }
+      .card p { font-size: 14px; color: #94A3B8; line-height: 1.6; margin-bottom: 1rem; }
       .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-      .price { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #185FA5; }
-      .order-btn { background: #042C53; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .order-btn:hover { background: #185FA5; }
+      .price { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #FF5722; }
+      .order-btn { background: #FF5722; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .order-btn:hover { background: #E64A19; }
 
       /* DIVIDER */
-      .section-divider { border: none; border-top: 1px solid #e5e7eb; margin: 0 2rem; }
+      .section-divider { border: none; border-top: 1px solid #1E2D45; margin: 0 2rem; }
 
       /* CUSTOM PROJECT */
-      #custom-project { background: #042C53; padding: 4rem 2rem; text-align: center; }
-      #custom-project h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
-      #custom-project p { color: #85B7EB; font-size: 15px; margin-bottom: 2rem; }
+      #custom-project { background: #0D1525; padding: 4rem 2rem; text-align: center; border-top: 1px solid #1E2D45; border-bottom: 1px solid #1E2D45; }
+      #custom-project h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #F1F5F9; margin-bottom: 0.5rem; }
+      #custom-project p { color: #94A3B8; font-size: 15px; margin-bottom: 2rem; }
       .idea-form { max-width: 480px; margin: auto; display: flex; flex-direction: column; gap: 12px; }
-      .idea-form input, .idea-form textarea { padding: 12px 16px; border-radius: 10px; border: 1px solid #B5D4F4; font-size: 15px; font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; outline: none; transition: border-color 0.2s; }
-      .idea-form input:focus, .idea-form textarea:focus { border-color: #378ADD; }
+      .idea-form input, .idea-form textarea { padding: 12px 16px; border-radius: 10px; border: 1px solid #1E2D45; font-size: 15px; font-family: 'DM Sans', sans-serif; background: #162035; color: #F1F5F9; outline: none; transition: border-color 0.2s; }
+      .idea-form input::placeholder, .idea-form textarea::placeholder { color: #64748B; }
+      .idea-form input:focus, .idea-form textarea:focus { border-color: #FF5722; }
       .idea-form textarea { min-height: 120px; resize: vertical; }
-      .idea-form button { padding: 13px; border: none; border-radius: 10px; background: #378ADD; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .idea-form button:hover { background: #185FA5; }
+      .idea-form button { padding: 13px; border: none; border-radius: 10px; background: #FF5722; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .idea-form button:hover { background: #E64A19; }
 
       /* FOOTER */
-      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; }
-      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-      .footer-logo span { color: #378ADD; }
+      footer { background: #060B14; color: #64748B; text-align: center; padding: 1.5rem 2rem; font-size: 13px; border-top: 1px solid #1E2D45; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #F1F5F9; margin-bottom: 6px; }
+      .footer-logo span { color: #FF5722; }
       .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 10px; flex-wrap: wrap; }
-      .footer-links a { font-size: 13px; color: #85B7EB; text-decoration: none; transition: color 0.2s; }
-      .footer-links a:hover { color: #fff; }
+      .footer-links a { font-size: 13px; color: #64748B; text-decoration: none; transition: color 0.2s; }
+      .footer-links a:hover { color: #F1F5F9; }
 
       /* CART SIDEBAR */
-      .cart-sidebar { position: fixed; top: 0; right: -420px; width: 370px; height: 100%; background: #fff; color: #1a1a1a; padding: 1.5rem; box-shadow: -4px 0 30px rgba(0,0,0,0.12); transition: 0.35s ease; overflow-y: auto; z-index: 999; font-family: 'DM Sans', sans-serif; border-left: 1px solid #e5e7eb; }
+      .cart-sidebar { position: fixed; top: 0; right: -420px; width: 370px; height: 100%; background: #111C2E; color: #F1F5F9; padding: 1.5rem; box-shadow: -4px 0 30px rgba(0,0,0,0.4); transition: 0.35s ease; overflow-y: auto; z-index: 999; font-family: 'DM Sans', sans-serif; border-left: 1px solid #1E2D45; }
       .cart-sidebar.active { right: 0; }
-      .cart-sidebar h2 { font-family: 'Syne', sans-serif; font-size: 20px; color: #042C53; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
-      .cart-item { background: #f8fafc; border: 1px solid #e5e7eb; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-      .remove-btn { background: #FEE2E2; border: none; padding: 5px 10px; border-radius: 6px; color: #991B1B; cursor: pointer; font-weight: 700; font-size: 12px; }
-      .remove-btn:hover { background: #FECACA; }
-      #total { font-family: 'Syne', sans-serif; font-size: 18px; color: #185FA5; margin: 1rem 0; }
-      .close-btn { width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; color: #6b7280; cursor: pointer; font-size: 14px; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
-      #cart-sidebar .checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #042C53; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; transition: background 0.2s; }
-      #cart-sidebar .checkout-btn:hover { background: #185FA5; }
+      .cart-sidebar h2 { font-family: 'Syne', sans-serif; font-size: 20px; color: #F1F5F9; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #1E2D45; }
+      .cart-item { background: #162035; border: 1px solid #1E2D45; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+      .remove-btn { background: #3B1212; border: none; padding: 5px 10px; border-radius: 6px; color: #FCA5A5; cursor: pointer; font-weight: 700; font-size: 12px; }
+      .remove-btn:hover { background: #4C1616; }
+      #total { font-family: 'Syne', sans-serif; font-size: 18px; color: #FF5722; margin: 1rem 0; }
+      .close-btn { width: 100%; padding: 10px; border: 1px solid #1E2D45; border-radius: 10px; background: transparent; color: #94A3B8; cursor: pointer; font-size: 14px; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
+      #cart-sidebar .checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #FF5722; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; transition: background 0.2s; }
+      #cart-sidebar .checkout-btn:hover { background: #E64A19; }
     </style>
   </head>
 
@@ -106,7 +107,7 @@
 
     <!-- NAV -->
     <nav>
-      <div class="logo">Arhaan<span>Tech</span></div>
+      <div class="logo">Robo<span>Forge.in</span></div>
       <div class="nav-right">
         <button class="btn-account" id="account-btn" onclick="window.location.href='account.html'">My Account</button>
         <button onclick="toggleCart()" class="cart-toggle cart-cart-button">
@@ -230,7 +231,7 @@
       <div class="products-grid">
         <div class="card">
           <div class="card-icon">⚙️</div>
-          <h3>ArhaanTech Arduino Kit</h3>
+          <h3>RoboForge Arduino Kit</h3>
           <p>Everything you need to start building your own Arduino projects.</p>
           <div class="card-footer"><div class="price">₹1999</div><button class="order-btn" onclick="window.location.href='beginner-kit.html'">Order Now</button></div>
         </div>
@@ -251,13 +252,13 @@
 
     <!-- FOOTER -->
     <footer>
-      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
+      <div class="footer-logo">Robo<span>Forge.in</span></div>
       <div class="footer-links">
         <a href="track-order.html">Track Order</a>
         <a href="account.html">My Account</a>
         <a href="#custom-project">Custom Project</a>
       </div>
-      <p style="margin-top:10px;">© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+      <p style="margin-top:10px;">© 2026 RoboForge.in · Handmade with ❤️ in Indore</p>
     </footer>
 
     <!-- CART SIDEBAR -->

@@ -15,6 +15,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Init EmailJS
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+  script.onload = () => emailjs.init('0SMai0kepsxfVg2je');
+  document.head.appendChild(script);
+})();
+
 window.placeOrder = async function() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -22,15 +30,13 @@ window.placeOrder = async function() {
     alert("Cart is empty!");
     return;
   }
-  
 
   const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
   const phone = document.getElementById("phone").value.trim();
   const address = document.getElementById("address").value.trim();
-  const email = document.getElementById("email").value.trim();
-  
 
-  if (!name || !phone || !address) {
+  if (!name || !email || !phone || !address) {
     alert("Please fill all details!");
     return;
   }
@@ -39,42 +45,42 @@ window.placeOrder = async function() {
   const items = cart.map((item) => item.name).join(", ");
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-  const btn = document.getElementById("place-order-btn");
-  btn.disabled = true;
-  btn.textContent = "Placing order...";
-
   try {
-    // Step 1 — Save to Google Sheets
-    const params = new URLSearchParams({
-      order, name, email, phone, address, items, total,
-    });
+    const btn = document.getElementById("place-order-btn");
+    if (btn) { btn.disabled = true; btn.textContent = "Placing Order..."; }
 
+    // Save to Google Sheets
+    const params = new URLSearchParams({ order, name, email, phone, address, items, total });
     await fetch(
       "https://script.google.com/macros/s/AKfycbwp0Mise2QG0BCtgNp59nAXq6k8w070W1Sz9lBdjtxxzhgoOysD0j4h5jeJr41-vzR2Sg/exec?" +
       params.toString()
     );
 
-    // Step 2 — Save to Firebase for customer order tracking
+    // Save to Firebase
     await addDoc(collection(db, "orders"), {
       orderId: order,
-      name: name,
-      email: email,
-      phone: phone,
-      address: address,
-      items: items,
-      total: total,
-      status: "Processing",
+      name, email, phone, address, items, total,
+      status: "Received",
       createdAt: serverTimestamp()
     });
 
-    // Step 3 — Clear cart and redirect
+    // Send confirmation email
+    try {
+      await emailjs.send('service_ij5br65', 'template_zga47lv', {
+        email, order_id: order,
+        orders: [{ name: items, price: total, units: 1 }],
+        name: items, price: total, units: 1,
+        'cost.shipping': 0, 'cost.tax': 0, 'cost.total': total
+      });
+    } catch(e) { console.error('Email failed:', e); }
+
     localStorage.removeItem("cart");
     window.location.href = "success.html?order=" + order;
 
-  } catch (err) {
-    console.error("Order error:", err);
+  } catch(err) {
     alert("Something went wrong! Please try again.");
-    btn.disabled = false;
-    btn.textContent = "Place Order";
+    console.error(err);
+    const btn = document.getElementById("place-order-btn");
+    if (btn) { btn.disabled = false; btn.textContent = "Place Order"; }
   }
 }

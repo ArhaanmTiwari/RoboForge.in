@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Touch Sensor Alarm | Arhaan Tech</title>
+    <title>Touch Sensor Alarm | RoboForge.in</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; }
-      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
-      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; letter-spacing: -0.5px; cursor: pointer; }
-      .logo span { color: #378ADD; }
+      body { font-family: 'DM Sans', sans-serif; background: #090D18; color: #F1F5F9; }
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #0D1525; border-bottom: 1px solid #1E2D45; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #F1F5F9; letter-spacing: -0.5px; cursor: pointer; }
+      .logo span { color: #FF5722; }
       .nav-right { display: flex; align-items: center; gap: 10px; }
-      .back-btn { background: #f8fafc; color: #042C53; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-      .back-btn:hover { background: #E6F1FB; }
-      .cart-toggle { padding: 10px 18px; background: #042C53; border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; display: flex; align-items: center; gap: 6px; }
-      .cart-toggle:hover { background: #185FA5; }
+      .back-btn { background: #162035; color: #F1F5F9; border: 1px solid #1E2D45; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .back-btn:hover { background: #1E2D45; }
+      .cart-toggle { padding: 10px 18px; background: #FF5722; border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+      .cart-toggle:hover { background: #E64A19; }
       .cart-cart-button { position: static; }
-      .cart-count { background: #378ADD; border-radius: 50%; width: 20px; height: 20px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
-      .hero { background: linear-gradient(135deg, #E6F1FB 0%, #fff 70%); padding: 3rem 2rem; border-bottom: 1px solid #e5e7eb; }
+      .cart-count { background: #22D3EE; color: #090D18; border-radius: 50%; width: 20px; height: 20px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+      .hero { background: linear-gradient(135deg, #0D1E38 0%, #090D18 70%); padding: 3rem 2rem; border-bottom: 1px solid #1E2D45; }
       .hero-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; }
-      .hero-icon { width: 80px; height: 80px; background: #fff; border: 1px solid #B5D4F4; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 42px; }
-      .hero-category { font-size: 13px; font-weight: 500; color: #185FA5; background: #E6F1FB; border: 1px solid #B5D4F4; border-radius: 100px; padding: 3px 12px; display: inline-block; margin-bottom: 8px; }
-      .hero h1 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: #042C53; letter-spacing: -0.5px; margin-bottom: 6px; }
-      .hero p { font-size: 15px; color: #6b7280; line-height: 1.6; }
+      .hero-icon { width: 80px; height: 80px; background: #162035; border: 1px solid #1E2D45; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 42px; }
+      .hero-category { font-size: 13px; font-weight: 500; color: #22D3EE; background: #0A1F35; border: 1px solid #22D3EE; border-radius: 100px; padding: 3px 12px; display: inline-block; margin-bottom: 8px; }
+      .hero h1 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: #F1F5F9; letter-spacing: -0.5px; margin-bottom: 6px; }
+      .hero p { font-size: 15px; color: #94A3B8; line-height: 1.6; }
       .content { max-width: 900px; margin: 2rem auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 300px; gap: 1.5rem; align-items: start; }
-      .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
-      .card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
+      .card { background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
+      .card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #F1F5F9; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #1E2D45; }
       .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-      .feature-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #374151; }
-      .feature-list li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #378ADD; flex-shrink: 0; }
+      .feature-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #CBD5E1; }
+      .feature-list li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #FF5722; flex-shrink: 0; }
       .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-      .tech-item { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 14px; }
-      .tech-label { font-size: 11px; color: #9ca3af; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-      .tech-value { font-size: 14px; font-weight: 600; color: #042C53; }
+      .tech-item { background: #162035; border: 1px solid #1E2D45; border-radius: 10px; padding: 10px 14px; }
+      .tech-label { font-size: 11px; color: #64748B; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+      .tech-value { font-size: 14px; font-weight: 600; color: #F1F5F9; }
       .sticky-card { position: sticky; top: 80px; }
-      .price-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; }
-      .price-card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
-      .price-amount { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; color: #185FA5; margin-bottom: 1.5rem; }
-      .btn-buy { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #042C53; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-bottom: 10px; transition: background 0.2s; }
-      .btn-buy:hover { background: #185FA5; }
-      .btn-cart { width: 100%; padding: 14px; border: 1px solid #B5D4F4; border-radius: 10px; background: #E6F1FB; color: #042C53; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .btn-cart:hover { background: #B5D4F4; }
-      .shipping-note { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6b7280; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; }
-      .cart-sidebar { position: fixed; top: 0; right: -420px; width: 370px; height: 100%; background: #fff; color: #1a1a1a; padding: 1.5rem; box-shadow: -4px 0 30px rgba(0,0,0,0.12); transition: 0.35s ease; overflow-y: auto; z-index: 999; border-left: 1px solid #e5e7eb; }
+      .price-card { background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; padding: 1.5rem; }
+      .price-card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #F1F5F9; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #1E2D45; }
+      .price-amount { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; color: #FF5722; margin-bottom: 1.5rem; }
+      .btn-buy { width: 100%; padding: 14px; border: none; border-radius: 10px; background: #FF5722; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-bottom: 10px; transition: background 0.2s; }
+      .btn-buy:hover { background: #E64A19; }
+      .btn-cart { width: 100%; padding: 14px; border: 1px solid #FF5722; border-radius: 10px; background: transparent; color: #FF5722; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-cart:hover { background: rgba(255,87,34,0.1); }
+      .shipping-note { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748B; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1E2D45; }
+      .cart-sidebar { position: fixed; top: 0; right: -420px; width: 370px; height: 100%; background: #111C2E; color: #F1F5F9; padding: 1.5rem; box-shadow: -4px 0 30px rgba(0,0,0,0.4); transition: 0.35s ease; overflow-y: auto; z-index: 999; border-left: 1px solid #1E2D45; }
       .cart-sidebar.active { right: 0; }
-      .cart-sidebar h2 { font-family: 'Syne', sans-serif; font-size: 20px; color: #042C53; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; }
-      .cart-item { background: #f8fafc; border: 1px solid #e5e7eb; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-      .remove-btn { background: #FEE2E2; border: none; padding: 5px 10px; border-radius: 6px; color: #991B1B; cursor: pointer; font-weight: 700; font-size: 12px; }
-      #total { font-family: 'Syne', sans-serif; font-size: 18px; color: #185FA5; margin: 1rem 0; }
-      .close-btn { width: 100%; padding: 10px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fff; color: #6b7280; cursor: pointer; font-size: 14px; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
-      #cart-sidebar .checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #042C53; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
-      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 3rem; }
-      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-      .footer-logo span { color: #378ADD; }
+      .cart-sidebar h2 { font-family: 'Syne', sans-serif; font-size: 20px; color: #F1F5F9; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #1E2D45; }
+      .cart-item { background: #162035; border: 1px solid #1E2D45; padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+      .remove-btn { background: #3B1212; border: none; padding: 5px 10px; border-radius: 6px; color: #FCA5A5; cursor: pointer; font-weight: 700; font-size: 12px; }
+      #total { font-family: 'Syne', sans-serif; font-size: 18px; color: #FF5722; margin: 1rem 0; }
+      .close-btn { width: 100%; padding: 10px; border: 1px solid #1E2D45; border-radius: 10px; background: transparent; color: #94A3B8; cursor: pointer; font-size: 14px; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
+      #cart-sidebar .checkout-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #FF5722; color: white; font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; margin-top: 10px; }
+      footer { background: #060B14; color: #64748B; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 3rem; border-top: 1px solid #1E2D45; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #F1F5F9; margin-bottom: 6px; }
+      .footer-logo span { color: #FF5722; }
     </style>
   </head>
   <body>
     <nav>
-      <div class="logo" onclick="window.location.href='index.html'">Arhaan<span>Tech</span></div>
+      <div class="logo" onclick="window.location.href='index.html'">Robo<span>Forge.in</span></div>
       <div class="nav-right">
         <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
         <button onclick="toggleCart()" class="cart-toggle cart-cart-button">🛒 Cart <span id="cart-count" class="cart-count">0</span></button>
@@ -95,8 +95,8 @@
       </div>
     </div>
     <footer>
-      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
-      <p>© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+      <div class="footer-logo">Robo<span>Forge.in</span></div>
+      <p>© 2026 RoboForge.in · Handmade with ❤️ in Indore</p>
     </footer>
     <div id="cart-sidebar" class="cart-sidebar">
       <h2>Your Cart 🛒</h2>

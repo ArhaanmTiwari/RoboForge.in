@@ -3,65 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Account | Arhaan Tech</title>
+    <title>My Account | RoboForge.in</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
     <link rel="icon" href="data:,">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: 'DM Sans', sans-serif; background: #f8fafc; color: #1a1a1a; min-height: 100vh; }
-      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 100; }
-      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #042C53; cursor: pointer; }
-      .logo span { color: #378ADD; }
+      body { font-family: 'DM Sans', sans-serif; background: #090D18; color: #F1F5F9; min-height: 100vh; }
+      nav { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 64px; background: #0D1525; border-bottom: 1px solid #1E2D45; position: sticky; top: 0; z-index: 100; }
+      .logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #F1F5F9; letter-spacing: -0.5px; cursor: pointer; }
+      .logo span { color: #FF5722; }
       .nav-right { display: flex; align-items: center; gap: 10px; }
-      .btn-shop { background: #042C53; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-      .btn-logout { background: #f8fafc; color: #6b7280; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-      .btn-logout:hover { color: #042C53; }
-      #loading { display: flex; align-items: center; justify-content: center; height: 60vh; font-size: 16px; color: #6b7280; }
+      .btn-shop { background: #FF5722; color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .btn-shop:hover { background: #E64A19; }
+      .btn-logout { background: #162035; color: #94A3B8; border: 1px solid #1E2D45; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+      .btn-logout:hover { color: #F1F5F9; border-color: #FF5722; }
+      #loading { display: flex; align-items: center; justify-content: center; height: 60vh; font-size: 16px; color: #94A3B8; }
       #main { display: none; max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
       .welcome { margin-bottom: 2rem; }
-      .welcome h1 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #042C53; margin-bottom: 4px; }
-      .welcome p { font-size: 14px; color: #6b7280; }
+      .welcome h1 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #F1F5F9; margin-bottom: 4px; }
+      .welcome p { font-size: 14px; color: #94A3B8; }
       .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-      .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; }
-      .card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
+      .card { background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; padding: 1.5rem; }
+      .card h2 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #F1F5F9; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #1E2D45; }
       .form-group { margin-bottom: 1rem; }
-      .form-group label { display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
-      .form-group input { width: 100%; padding: 10px 14px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #1a1a1a; outline: none; transition: border-color 0.2s; background: #fff; }
-      .form-group input:focus { border-color: #378ADD; }
-      .btn-save { width: 100%; padding: 11px; border: none; border-radius: 10px; background: #042C53; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
-      .btn-save:hover { background: #185FA5; }
-      .saved-msg { font-size: 13px; color: #166534; margin-top: 8px; text-align: center; display: none; }
+      .form-group label { display: block; font-size: 13px; font-weight: 500; color: #CBD5E1; margin-bottom: 6px; }
+      .form-group input { width: 100%; padding: 10px 14px; border: 1px solid #1E2D45; border-radius: 10px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #F1F5F9; outline: none; transition: border-color 0.2s; background: #162035; }
+      .form-group input:focus { border-color: #FF5722; }
+      .form-group input::placeholder { color: #64748B; }
+      .btn-save { width: 100%; padding: 11px; border: none; border-radius: 10px; background: #FF5722; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; }
+      .btn-save:hover { background: #E64A19; }
+      .saved-msg { font-size: 13px; color: #86EFAC; margin-top: 8px; text-align: center; display: none; }
       .saved-msg.show { display: block; }
-      .info-row { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+      .info-row { display: flex; justify-content: space-between; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #1E2D45; }
       .info-row:last-child { border-bottom: none; }
-      .info-row .label { color: #6b7280; }
-      .info-row .value { font-weight: 500; color: #042C53; }
-      .orders-section h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #042C53; margin-bottom: 1.25rem; }
-      .order-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
-      .order-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 8px; }
-      .order-id { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #042C53; }
-      .order-date { font-size: 13px; color: #6b7280; }
+      .info-row .label { color: #94A3B8; }
+      .info-row .value { font-weight: 500; color: #F1F5F9; }
+      .orders-section h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: #F1F5F9; margin-bottom: 1.25rem; }
+      .order-card { background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
+      .order-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #1E2D45; flex-wrap: wrap; gap: 8px; }
+      .order-id { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #22D3EE; }
+      .order-date { font-size: 13px; color: #94A3B8; }
       .status-badge { font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 100px; }
-      .status-received { background: #E6F1FB; color: #0C447C; }
-      .status-processing { background: #FEF3C7; color: #92400E; }
-      .status-shipped { background: #DCFCE7; color: #166534; }
-      .status-delivered { background: #F0FDF4; color: #15803D; }
+      .status-received { background: #0A1F35; color: #22D3EE; border: 1px solid #22D3EE; }
+      .status-processing { background: #2D1F0A; color: #FCD34D; border: 1px solid #F59E0B; }
+      .status-shipped { background: #0D2D1A; color: #86EFAC; border: 1px solid #22C55E; }
+      .status-delivered { background: #0D2D1A; color: #4ADE80; border: 1px solid #16A34A; }
       .order-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
-      .order-row .lbl { color: #6b7280; }
-      .order-row .val { font-weight: 500; color: #1a1a1a; max-width: 300px; text-align: right; }
-      .order-total { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #042C53; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f1f5f9; }
-      .empty-orders { text-align: center; padding: 3rem; color: #9ca3af; font-size: 15px; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; }
-      .empty-orders a { color: #378ADD; text-decoration: none; font-weight: 500; }
-      footer { background: #021d38; color: #85B7EB; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 3rem; }
-      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-      .footer-logo span { color: #378ADD; }
+      .order-row .lbl { color: #94A3B8; }
+      .order-row .val { font-weight: 500; color: #CBD5E1; max-width: 300px; text-align: right; }
+      .order-total { display: flex; justify-content: space-between; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: #FF5722; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #1E2D45; }
+      .empty-orders { text-align: center; padding: 3rem; color: #64748B; font-size: 15px; background: #111C2E; border: 1px solid #1E2D45; border-radius: 16px; }
+      .empty-orders a { color: #FF5722; text-decoration: none; font-weight: 500; }
+      footer { background: #060B14; color: #64748B; text-align: center; padding: 1.5rem 2rem; font-size: 13px; margin-top: 3rem; border-top: 1px solid #1E2D45; }
+      .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #F1F5F9; margin-bottom: 6px; }
+      .footer-logo span { color: #FF5722; }
       @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
 
     <nav>
-      <div class="logo" onclick="window.location.href='index.html'">Arhaan<span>Tech</span></div>
+      <div class="logo" onclick="window.location.href='index.html'">Robo<span>Forge.in</span></div>
       <div class="nav-right">
         <button class="btn-shop" onclick="window.location.href='index.html'">← Shop</button>
         <button class="btn-logout" id="logout-btn">Log Out</button>
@@ -113,8 +115,8 @@
     </div>
 
     <footer>
-      <div class="footer-logo">Arhaan<span>Tech</span> Innovations</div>
-      <p>© 2026 Arhaan Tech Innovations · Handmade with ❤️ in Indore</p>
+      <div class="footer-logo">Robo<span>Forge.in</span></div>
+      <p>© 2026 RoboForge.in · Handmade with ❤️ in Indore</p>
     </footer>
 
     <script type="module">
